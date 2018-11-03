@@ -7,4 +7,4 @@ Interactive Digital Artwork Inspired by Shelley Jackson's 'Patchwork Girl'
    
 References: 
 * user colouredmirrorball, https://discourse.processing.org/t/closing-a-second-window/381
-* credit: Recursive Tree by Daniel Shiffman, https://processing.org/examples/tree.html
+* Recursive Tree by Daniel Shiffman, https://processing.org/examples/tree.html
