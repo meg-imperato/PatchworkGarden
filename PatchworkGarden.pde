@@ -3,7 +3,7 @@
    
    credit: user colouredmirrorball, https://discourse.processing.org/t/closing-a-second-window/381
    credit: Recursive Tree by Daniel Shiffman, https://processing.org/examples/tree.html
-   
+   credit: Coding Challenge #3 Rain Effect by Barney, https://www.youtube.com/watch?v=dD9CwuvsBXc
    Goals: explore non-linear story telling through the cyclical nature of a garden, 
    create an interactive space where the user can explore the narritive out of order,
    play with the binary of life and death, show the transition from created to creator,
@@ -11,7 +11,7 @@
 */
 
 //initialize variables
-PWindow win; //variable for 2nd window
+HerGarden win; //variable for 2nd window
 String windowID="None"; 
 
 //variabels for drawing rectangles on main window
@@ -19,10 +19,12 @@ float rw;
 float rh;
 float rxy[][]= new float[7][2];
 
+int blinkTimer=0;
+
 PFont font; //font
 
 //animation variables
-int click=0;
+float click=0;
 int size=0;
 
 //tree variables
@@ -35,6 +37,8 @@ int rad;
 
 int seedY;
 
+
+
 PImage imgs[]= new PImage[8];
 
 public void settings() {
@@ -46,6 +50,7 @@ public void settings() {
   imgs[4]=loadImage("magazine.jpg");
   imgs[5]=loadImage("tools.jpg");
   imgs[6]=loadImage("garden.jpg");
+  imgs[7]=loadImage("mary2.jpg");
   
 }
 
@@ -86,6 +91,14 @@ void setup() {
 }
 
 void draw() { 
+  
+  if (blinkTimer%35==0 || (blinkTimer-1)%35==0 || (blinkTimer-2)%35==0){
+     image(imgs[7],width/2,height/2,width/2,height/2);
+   } else { //blink
+     image(imgs[1],width/2,height/2,width/2,height/2);
+   }
+   blinkTimer++;
+  
   stroke(0);
   strokeWeight(10);
   rectMode(CENTER); // draw using point in center
@@ -104,6 +117,9 @@ void draw() {
   textAlign(CENTER);
   for (int i=0; i<7; i++){ //draw rectangles and labels
     fill(#ffffff);
+    if (label[i].equals(windowID)){ //highlight recently clicked
+      fill(#FFF3AF);
+    }
     rect(rxy[i][0], rxy[i][1], rw, rh);
     fill(#000000);
     text(label[i],rxy[i][0],rxy[i][1]);
@@ -133,6 +149,6 @@ void mousePressed() {
   //only open new window if valid area was clicked
   if(win == null && !windowID.equals("None")){
     //println(windowID);
-    win = new PWindow();
+    win = new HerGarden();
   }
 } 
